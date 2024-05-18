@@ -347,9 +347,9 @@ class SwinUNETR_Four(nn.Module):
             norm_name=norm_name,
             res_block=True,
         )
-        self.fusion5 = MultiPhaseFusion_EfficientAttn_Ratio(in_channel=8 * feature_size, heads=24, sr_ratio=2)
+        self.fusion5 = MultiPhaseFusion_RegionAttn_Ratio(in_channel=8 * feature_size, heads=24, sr_ratio=2)
 
-        self.fusion10 = MultiPhaseFusion_EfficientAttn_Ratio(in_channel=16 * feature_size, heads=48, sr_ratio=1)
+        self.fusion10 = MultiPhaseFusion_RegionAttn_Ratio(in_channel=16 * feature_size, heads=48, sr_ratio=1)
 
         self.out = UnetOutBlock(spatial_dims=spatial_dims, in_channels=feature_size, out_channels=out_channels)
 
@@ -1207,12 +1207,12 @@ class CrossAttention(nn.Module):
         return out
     
 
-class MultiPhaseFusion_EfficientAttn_Ratio(nn.Module):
+class MultiPhaseFusion_RegionAttn_Ratio(nn.Module):
     def __init__(self, in_channel=768, heads=8, sr_ratio=1):
         super().__init__()
-        self.attn0 = EfficientAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
-        self.attn1 = EfficientAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
-        self.attn2 = EfficientAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
+        self.attn0 = RegionAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
+        self.attn1 = RegionAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
+        self.attn2 = RegionAttention_ratio(dim=in_channel, num_heads=heads, sr_ratio=sr_ratio)
     def forward(self, feat_p, feat_a, feat_v, feat_d):
         feat_vp = self.attn0(feat_v, feat_p)
         feat_va = self.attn1(feat_v, feat_a)
@@ -1222,7 +1222,7 @@ class MultiPhaseFusion_EfficientAttn_Ratio(nn.Module):
 
 
 
-class EfficientAttention_ratio(nn.Module):
+class RegionAttention_ratio(nn.Module):
     def __init__(self, dim, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0., sr_ratio=1):
         super().__init__()
         assert dim % num_heads == 0, "dim should be divisible by num_heads"

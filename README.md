@@ -10,26 +10,26 @@ feature maps between the prediction phase and auxiliary phases at the regional l
 In addition, the performance of existing methods are still limited by insufficient 
 feature extraction, we propose residual shift windows transformer within sliding 
 widow to exact feature.
-In this work, we introduce a novel method, MpFLLFormer, for focal liver lesion segmentation. 
-We have conducted extensive testing on both brain and liver datasets. Our approach 
-demonstrates an improvement in Dice similarity coefficient segmentation accuracy of 
-2.53\% on our in-house MPFLLsDS dataset and 0.15\% on the BraTS public dataset when 
-compared to the most recent state-of-the-art methods, respectively.
+In this work, we introduce a novel method, MpFLLFormer, for focal liver lesion 
+segmentation. We have conducted extensive testing on both brain and liver datasets.
+Our approach demonstrates an improvement in Dice similarity coefficient segmentation 
+accuracy of 2.53\% on our in-house MPFLLsDS dataset and 0.15\% on the BraTS public
+dataset when compared to the most recent state-of-the-art methods, respectively.
 ```
 
-# CodeStructure
+# Structure
 
 - algorithms: 
-    - <network name>
+    - method-name
         - network
         - train
         - test
 - dataset:
 - loss: loss function
 - optimizer:
-- scripts：
-- utils：存放一些通用的工具类代码，如指标计算，后处理等
-- assets：存放一些文档中使用的插图等
+- scripts: 
+- utils: Store some general utility class codes, such as index calculation, post-processing, etc.
+- assets: 
 
 # Installation
 
@@ -40,3 +40,23 @@ pip install -r requirements.txt
 pip install 'monai[all]'
 pip install monai==1.2.0
 ```
+
+
+# How to train
+
+## single phase train
+```
+  python ./MpFLLFormer/train/main_single.py
+```
+
+## four phase train
+```
+  python ./MpFLLFormer/train/main_four.py
+```
+
+# How to test
+
+```
+  python ./script/hi_measure.py
+```
+

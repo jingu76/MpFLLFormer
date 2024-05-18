@@ -26,7 +26,7 @@ from dataset.datasets import get_loader_mp
 from monai.inferers import sliding_window_inference
 from monai.losses import DiceCELoss
 from monai.metrics import DiceMetric
-from algorithms.SwinUNETR.network.swin_unetr_resswin_skipadd_cfusion import SwinUNETR_Two
+from algorithms.MpFLLFormer.network.res_swin_unetr_skipadd_region_fusion import SwinUNETR_Two
 from monai.transforms import Activations, AsDiscrete, Compose
 from monai.utils.enums import MetricReduction
 from utils.utils import info_if_main, load_model, logger_info
