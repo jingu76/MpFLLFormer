@@ -1,26 +1,39 @@
-# 目录结构说明
+# Background
+```
+Multi-phase computed tomography images provide crucial complementary information 
+for accurate liver tumor segmentation. State-of-the-art multi-phase LiTS methods 
+typically fuse cross-phase features using phase-weighted attention based on 
+concatenation or summation. However, these methods neglect the spatial regional 
+relationships between different phases, leading to insufficient feature integration.
+To address this issue, we propose the region-based aggregation fusion block to fuse 
+feature maps between the prediction phase and auxiliary phases at the regional level. 
+In addition, the performance of existing methods are still limited by insufficient 
+feature extraction, we propose residual shift windows transformer within sliding 
+widow to exact feature.
+In this work, we introduce a novel method, MpFLLFormer, for focal liver lesion segmentation. 
+We have conducted extensive testing on both brain and liver datasets. Our approach 
+demonstrates an improvement in Dice similarity coefficient segmentation accuracy of 
+2.53\% on our in-house MPFLLsDS dataset and 0.15\% on the BraTS public dataset when 
+compared to the most recent state-of-the-art methods, respectively.
+```
 
-- algorithm：存放不同算法模型以及相关训练与测试脚本（每个算法模型单独建一个文件夹） 
-    - Algorithm1
-        - network：存放模型定义相关代码
-        - train：存放训练相关代码
-        - test：存放推理/测试相关代码
-- dataset：存放Dataset的相关实现
-- loss：存放一些自定义的Loss实现
-- optimizer：存放一些自定义的优化器以及lr scheduler实现
-- scripts：存放一些通用脚本，如数据集转换、统一测试脚本等
+# CodeStructure
+
+- algorithms: 
+    - <network name>
+        - network
+        - train
+        - test
+- dataset:
+- loss: loss function
+- optimizer:
+- scripts：
 - utils：存放一些通用的工具类代码，如指标计算，后处理等
 - assets：存放一些文档中使用的插图等
 
-# 代码编写要求
+# Installation
 
-- import 路径统一使用项目根目录
-- 无关文件在.gitignore中进行指定
-- 如果算法有特殊的依赖需求，在对应的算法目录中增加相应的requirements.txt或README.md说明依赖配置方式
-
-# 依赖安装
-
-先安装torch 1.13.1，参照torch官网
+ install torch 1.13.1, refer to torch official site
 
 ```
 pip install -r requirements.txt
