@@ -23,12 +23,11 @@ import torch.nn.parallel
 import torch.utils.data.distributed
 from dataset.datasets import get_loader
 from optimizers.lr_scheduler import LinearWarmupCosineAnnealingLR, WarmupExponentialLR
+from algorithms.SwinUNETR.train.trainer_single import run_training
+
 from monai.inferers import sliding_window_inference
 from monai.losses import DiceCELoss
-
-from algorithms.MpFLLFormer.network.res_swin_unetr_skipadd import SwinUNETR
-from algorithms.MpFLLFormer.train.trainer_single import run_training
-
+from algorithms.SwinUNETR.network.swin_unetr_mamba import SwinUNETR
 from utils.utils import info_if_main, load_model, logger_info
 from loguru import logger
 from loss.boundary_loss import DiceBDLoss
