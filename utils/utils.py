@@ -114,6 +114,17 @@ def cal_brats_dsc(x, y):
     return dscs
 
 
+def cal_chaos_dsc(x, y):
+    """_summary_
+
+    Args:
+        x (numpy.ndarry|torch.Tensor): shape (h, w, d)
+        y (numpy.ndarry|torch.Tensor): shape (h, w, d)
+    """
+    dscs = [cal_dice(x==i, y==i) for i in range(1, 5)]
+    return dscs
+
+
 class AverageMeter(object):
     def __init__(self):
         self.reset()

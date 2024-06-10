@@ -14,8 +14,8 @@ def get_list(root_dir, data_dir):
     results = []
     
     data_dir_abs = os.path.join(root_dir, data_dir)
-    images_dir_abs = os.path.join(data_dir_abs, "scan")
-    labels_dir_abs = os.path.join(data_dir_abs, "label")
+    images_dir_abs = os.path.join(data_dir_abs, "images")
+    labels_dir_abs = os.path.join(data_dir_abs, "labels")
     
     image_names = os.listdir(images_dir_abs)
     random.shuffle(image_names)
@@ -26,8 +26,8 @@ def get_list(root_dir, data_dir):
         if not os.path.exists(label_path_abs):
             raise Exception(f"{label_path_abs} not exist")
         
-        image_path = os.path.join(data_dir, "scan", image_name)
-        label_path = os.path.join(data_dir, "label", label_name)
+        image_path = os.path.join(data_dir, "images", image_name)
+        label_path = os.path.join(data_dir, "labels", label_name)
         fold = int((idx)*5/len(image_names))
         results.append({"image":image_path, "label":label_path, "fold":fold})
     
